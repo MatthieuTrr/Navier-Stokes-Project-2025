@@ -1,4 +1,5 @@
-function[X]=PeriodicThomas(Tridiag,f)
+function fi=trid_per_c2D(aa,ab,ac,fi)
+  
 
 
 end
