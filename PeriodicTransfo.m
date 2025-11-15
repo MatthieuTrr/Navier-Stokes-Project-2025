@@ -3,9 +3,10 @@
 % système linéaire à matrice périodique en un
 % système à matrice tridiagonale.
 % ===============================================
-function [X] = PeriodicTransfo(Per, f)
+function [Tridiag, f2] = PeriodicTransfo(Per, f)
 
 
 
 end
+
 
