@@ -1,3 +1,8 @@
+% ===============================================
+% Implémentation simple de l'algorithme de Thomas
+% pour la résolution de systèmes linéaires à
+% matrices tridiagonales.
+% ===============================================
 function [X] = ThomasAlgorithm(Tridiag, f)
     n = length(f);
     X = zeros(n, 1); % Initialisation du vecteur solution
@@ -26,4 +31,5 @@ function [X] = ThomasAlgorithm(Tridiag, f)
         X(k) = Gamma(k) - C(k) * X(k+1) / Beta(k);
     end
 end
+
 
