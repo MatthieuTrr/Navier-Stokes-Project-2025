@@ -9,6 +9,6 @@ function [fi]=trid_per_C2D(aa,ab,ac,fi)
  % L'idée est de "stocker" nos systèmes tridiagonaux dans
  % 3 matrices: aa, ab, ac; contenant respectivement les 3
  % diagonales de tous les systèmes en colonnes. aa est donc
- % une matrice de taille n*m dont les colonnes sont les sous-
+ % une matrice de taille m*n dont les colonnes sont les sous-
  % diagonales de chaque système.
 end
