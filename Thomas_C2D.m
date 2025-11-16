@@ -11,7 +11,7 @@ function [x] = Thomas_C2D(aa,ab,ac,fi)
   gamma = zeros(m, n);
   x = zeros(m, n);
   beta(:,1)=ab(:,1);
-  gamma(:,1)=fi(:,1)/ab(:,1);
+  gamma(:,1)=fi(:,1)./ab(:,1);
   for i=2:n
     beta(:,i)=ab(:,i)-ac(:,i-1)./beta(:,i-1).*aa(:,i);
     gamma(:,i)=(fi(:,i)-aa(:,i).*gamma(:,i-1))./beta(:,i);
@@ -24,6 +24,7 @@ function [x] = Thomas_C2D(aa,ab,ac,fi)
 
 
 end
+
 
 
 
