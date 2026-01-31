@@ -22,8 +22,6 @@ MatrixXd trid_per_C2D(MatrixXd aa, MatrixXd ab, MatrixXd ac, MatrixXd fi){
     MatrixXd v=MatrixXd::Zero(n,m);
     v.row(0)=aa.row(0);
     v.row(n-1)=ac.row(n-1);
-    MatrixXd aa_star=aa.block(1,0,n-1,aa.cols());
-    MatrixXd ac_star=ac.block(0,0,n-2,ac.cols());
     MatrixXd ab_star=ab;
     ab_star.row(0)=ab.row(0)-aa.row(0);
     ab_star.row(n-1)=ab.row(n-1)-ac.row(n-1);
@@ -38,16 +36,16 @@ MatrixXd trid_per_C2D(MatrixXd aa, MatrixXd ab, MatrixXd ac, MatrixXd fi){
          X2 = MatrixXd::Zero(n,m),
          sol = MatrixXd::Zero(n,m);
     // beta(1,:)=ab(1,:);
-    beta.row(0)=ab.row(0);
+    beta.row(0)=ab_star.row(0);
     // gamma(1,:)=fi(1,:)./ab(1,:);
-    gamma1.row(0)=fi.row(0).cwiseQuotient(ab.row(0));
-    gamma2.row(0)=v.row(0).cwiseQuotient(ab.row(0));
+    gamma1.row(0)=fi.row(0).cwiseQuotient(ab_star.row(0));
+    gamma2.row(0)=v.row(0).cwiseQuotient(ab_star.row(0));
     for (int i=1; i<n; i++){
         // beta(i,:)=ab(i,:)-ac(i-1,:).*aa(i-1,:)./beta(i-1,:);
-        beta.row(i)=ab.row(i)-ac.row(i-1).cwiseProduct(aa.row(i-1)).cwiseQuotient(beta.row(i-1));
+        beta.row(i)=ab_star.row(i)-ac.row(i-1).cwiseProduct(aa.row(i)).cwiseQuotient(beta.row(i-1));
         // gamma(i,:)=(fi(i,:)-aa(i-1,:).*gamma(i-1,:))./beta(i,:);
-        gamma1.row(i)=(fi.row(i)-aa.row(i-1).cwiseProduct(gamma1.row(i-1))).cwiseQuotient(beta.row(i));
-        gamma2.row(i)=(v.row(i)-aa.row(i-1).cwiseProduct(gamma2.row(i-1))).cwiseQuotient(beta.row(i));
+        gamma1.row(i)=(fi.row(i)-aa.row(i).cwiseProduct(gamma1.row(i-1))).cwiseQuotient(beta.row(i));
+        gamma2.row(i)=(v.row(i)-aa.row(i).cwiseProduct(gamma2.row(i-1))).cwiseQuotient(beta.row(i));
     }
 
     //Construction des X1 et X2 par récurrence inverse
